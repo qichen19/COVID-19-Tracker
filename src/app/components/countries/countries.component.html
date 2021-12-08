@@ -1,0 +1,30 @@
+<div class="ui dimmer" [class.active]="loading">
+    <div class="ui loader"></div>
+</div>
+
+<div class="jumbotron bg-white text-center">
+  <h1 class="display-4">Covid-19 Cases By Country</h1>
+  <hr>
+
+  <div class="mx-auto">
+    <div class="form-goup col-lg-5 mx-auto">
+      <label for="c">Select Country</label>
+      <select id ="c"  class="form-control" name="" #input (change)="updateValues(input.value)">
+        <option value="{{country}}" *ngFor="let country of countries">{{country}}</option>
+      </select>
+    </div>
+  </div>
+  <app-dashboard-card
+    [totalConfirmed] = "totalConfirmed"
+    [totalDeaths] = "totalDeaths"
+  ></app-dashboard-card>
+
+  <div class="row">
+    <div class="col col-md-6">
+      <google-chart [type]= "linechart.chartType" [options] = "linechart.options" style="width: 100%" [height] = "linechart.height" [data]="linechartDatatable"></google-chart>
+    </div>
+    <div class="col-12 col-md-6">
+      <google-chart [type]="columnchart.chartType" [options] = "columnchart.options" style="width: 100%" [height] = "columnchart.height" [data]="columnchartDatatable"></google-chart>
+    </div>
+  </div>
+</div>
