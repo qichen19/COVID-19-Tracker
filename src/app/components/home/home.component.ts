@@ -10,6 +10,7 @@ import {GoogleChartInterface, GoogleChartsControlInterface, RegionClickEvent} fr
 })
 export class HomeComponent implements OnInit {
 
+
   totalConfirmed = 0;
   totalDeaths = 0;
   globalData: GlobalDataSummary[];
@@ -29,7 +30,8 @@ export class HomeComponent implements OnInit {
         duration: 1000,
         easing: 'out',
         is3D: true
-      }
+      },
+      colors: ['#FF6F50']
     }
   }
 

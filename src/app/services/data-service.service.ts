@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
 import { GlobalDataSummary } from '../models/global-data';
 import { TimeDataSummary } from '../models/time-data';
 import { formatDate } from '@angular/common';
@@ -16,11 +16,13 @@ export class DataServiceService {
 
   private globalDataUrl = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/'+this.prevDateFormat+'.csv';
   private timeDataUrl = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv';
+
   constructor(private http: HttpClient) { }
 
   getDate() {
     return this.prevDateFormat;
   }
+
 
   getTimeData() {
     return this.http.get(this.timeDataUrl, {responseType: 'text'})
@@ -48,7 +50,6 @@ export class DataServiceService {
         })
       })
 
-      //console.log(mainData);
       return mainData;
     }));
   }

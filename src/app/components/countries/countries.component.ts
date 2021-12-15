@@ -14,6 +14,7 @@ export class CountriesComponent implements OnInit {
   totalConfirmed = 0;
   totalDeaths = 0;
   selectedCountryData: TimeDataSummary[];
+  selectedCountryDataRecentMonth: TimeDataSummary[];
   timeData;
   loading = true;
   linechartDatatable = [];
@@ -30,7 +31,8 @@ export class CountriesComponent implements OnInit {
         duration: 1000,
         easing: 'out',
         is3D: true
-      }
+      },
+      colors: ['#FF6F50']
     }
   }
 
@@ -45,7 +47,8 @@ export class CountriesComponent implements OnInit {
         duration: 1000,
         easing: 'out',
         is3D: true
-      }
+      },
+      colors: ['#FF6F50']
     }
   }
 
@@ -78,9 +81,23 @@ export class CountriesComponent implements OnInit {
         this.columnchartDatatable.push([cs.date, cs.cases]);
       } else {
         this.columnchartDatatable.push([cs.date, cs.cases - this.selectedCountryData[idx-1].cases]);
-      }
-      
+      }      
     })
+  }
+
+  updateChartRecent() {
+
+    this.linechartDatatable = [];
+    this.columnchartDatatable = [];
+    this.selectedCountryDataRecentMonth.forEach((cs, idx) => {
+      this.linechartDatatable.push([cs.date, cs.cases]);
+      if(idx == 0) {
+        this.columnchartDatatable.push([cs.date, cs.cases]);
+      } else {
+        this.columnchartDatatable.push([cs.date, cs.cases - this.selectedCountryData[idx-1].cases]);
+      }      
+    })
+
   }
 
   updateValues(country: string) {
@@ -92,6 +109,7 @@ export class CountriesComponent implements OnInit {
     })
 
     this.selectedCountryData = this.timeData[country];
+    this.selectedCountryDataRecentMonth = this.selectedCountryData.slice(-30);
     console.log(this.selectedCountryData);
     this.updateChart();
   }

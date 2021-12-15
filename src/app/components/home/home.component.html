@@ -1,13 +1,12 @@
 <div class="jumbotron bg-white text-center">
   <h1 class="display-4">Covid-19 Cases Worldwide</h1>
-  <h3>last updated at: {{currentDate}}</h3>
-  <hr>
+  <h3>{{currentDate}}</h3>
+
   <app-dashboard-card
     [totalConfirmed] = "totalConfirmed"
     [totalDeaths] = "totalDeaths"
   ></app-dashboard-card>
-</div>
-<hr>
+
 <div class="ui form">
   <div class="inline fields">
     <label for="caseType">Select Case Type:</label>
@@ -32,7 +31,5 @@
   <div class="col-12 col-md-6">
     <google-chart [type]= "columnChart.chartType" [dynamicResize]="dynamicResize" [options] = "columnChart.options" style="width: 100%" [height] = "columnChart.height" [data]="columnchartDatatable"></google-chart>
   </div>
-  <!-- <div class="col-6">
-    <google-chart [type]="chart.ColumnChart" [dynamicResize]="dynamicResize" [options] = "chart.options" style="width: 100%; height: 150%" [height] = "chart.height" [data]="datatable"></google-chart>
-  </div> -->
+</div>
 </div>
