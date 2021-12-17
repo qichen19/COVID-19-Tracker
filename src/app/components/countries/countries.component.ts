@@ -76,28 +76,28 @@ export class CountriesComponent implements OnInit {
     this.linechartDatatable = [];
     this.columnchartDatatable = [];
     this.selectedCountryData.forEach((cs, idx) => {
-      this.linechartDatatable.push([cs.date, cs.cases]);
+      this.linechartDatatable.push([cs.date, cs.cases]); 
       if(idx == 0) {
         this.columnchartDatatable.push([cs.date, cs.cases]);
       } else {
         this.columnchartDatatable.push([cs.date, cs.cases - this.selectedCountryData[idx-1].cases]);
-      }      
-    })
+      }     
+    });
+   
   }
 
   updateChartRecent() {
-
     this.linechartDatatable = [];
     this.columnchartDatatable = [];
     this.selectedCountryDataRecentMonth.forEach((cs, idx) => {
       this.linechartDatatable.push([cs.date, cs.cases]);
       if(idx == 0) {
-        this.columnchartDatatable.push([cs.date, cs.cases]);
+        
       } else {
-        this.columnchartDatatable.push([cs.date, cs.cases - this.selectedCountryData[idx-1].cases]);
-      }      
-    })
-
+        this.columnchartDatatable.push([cs.date, cs.cases - this.selectedCountryDataRecentMonth[idx-1].cases]);
+      } 
+    });
+    
   }
 
   updateValues(country: string) {
@@ -109,8 +109,7 @@ export class CountriesComponent implements OnInit {
     })
 
     this.selectedCountryData = this.timeData[country];
-    this.selectedCountryDataRecentMonth = this.selectedCountryData.slice(-30);
-    console.log(this.selectedCountryData);
+    this.selectedCountryDataRecentMonth = this.selectedCountryData.slice(-31);
     this.updateChart();
   }
 
